@@ -5,10 +5,9 @@ import com.falilou.cartrack.entities.Utilisateur;
 import com.falilou.cartrack.mappers.UtilisateurMapper;
 import com.falilou.cartrack.repositories.UtilisateurRepository;
 import com.falilou.cartrack.services.serviceInterface.IUtilisateur;
-import com.falilou.cartrack.web.request.UtilisateurRequestDto;
-import com.falilou.cartrack.web.response.UtilisateurResponseDto;
+import com.falilou.cartrack.web.dtos.request.UtilisateurRequestDto;
+import com.falilou.cartrack.web.dtos.request.response.UtilisateurResponseDto;
 import lombok.RequiredArgsConstructor;
-import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,13 +28,16 @@ public class UtilisateurService implements IUtilisateur {
                     utilisateur.setUsername(utilisateurDTO.username());
                     utilisateur.setNom(utilisateurDTO.nom());
                     utilisateur.setPrenom(utilisateurDTO.prenom());
+                    utilisateur.setRole(utilisateurDTO.role());
                 }
             }
-            Utilisateur user = utilisateurMapper.toEntit(utilisateurDTO);
+            Utilisateur user = utilisateurMapper.toEntity(utilisateurDTO);
             utilisateurRepository.saveAndFlush(user);
+            return utilisateurMapper.toResponse(user);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return null;
     }
+
+
 }

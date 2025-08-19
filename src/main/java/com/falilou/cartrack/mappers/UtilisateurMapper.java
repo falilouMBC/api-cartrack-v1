@@ -1,7 +1,8 @@
 package com.falilou.cartrack.mappers;
 
 import com.falilou.cartrack.entities.Utilisateur;
-import com.falilou.cartrack.web.request.UtilisateurRequestDto;
+import com.falilou.cartrack.web.dtos.request.UtilisateurRequestDto;
+import com.falilou.cartrack.web.dtos.request.response.UtilisateurResponseDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.ReportingPolicy;
@@ -10,7 +11,7 @@ import org.mapstruct.ReportingPolicy;
 public interface UtilisateurMapper {
 
 
-    Utilisateur toEntit(UtilisateurRequestDto utilisateurRequestDto);
+    Utilisateur toEntity(UtilisateurRequestDto utilisateurRequestDto);
 
-    UtilisateurRequestDto toDto(Utilisateur utilisateur);
+    UtilisateurResponseDto toResponse(Utilisateur utilisateur);
 }

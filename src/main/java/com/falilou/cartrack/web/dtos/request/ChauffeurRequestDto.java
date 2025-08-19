@@ -1,4 +1,4 @@
-package com.falilou.cartrack.web.request;
+package com.falilou.cartrack.web.dtos.request;
 
 import com.falilou.cartrack.entities.Livraison;
 import com.falilou.cartrack.entities.Permis;
