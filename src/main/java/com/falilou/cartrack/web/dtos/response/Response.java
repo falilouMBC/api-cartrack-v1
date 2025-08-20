@@ -6,8 +6,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import lombok.experimental.Accessors;
 
-@RequiredArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Accessors(chain = true)
@@ -21,9 +21,4 @@ public class Response<T>{
     private Object error;
     private Object metadata;
     private Object message;
-
-    public Response(String status, T payload) {
-        this.status = status;
-        this.payload = payload;
-    }
 }

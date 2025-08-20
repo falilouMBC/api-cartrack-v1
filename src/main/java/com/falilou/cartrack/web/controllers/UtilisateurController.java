@@ -15,7 +15,7 @@ public class UtilisateurController {
     private final IUtilisateur iUtilisateur;
 
     @PostMapping("/utilisateur")
-    public UtilisateurResponseDto save(@Validated @RequestBody UtilisateurRequestDto utilisateur, boolean isRegister) {
-        return iUtilisateur.save(utilisateur,isRegister);
+    public UtilisateurResponseDto save(@Validated @RequestBody UtilisateurRequestDto utilisateur) {
+        return iUtilisateur.save(utilisateur);
     }
 }

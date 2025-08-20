@@ -4,6 +4,7 @@ import com.falilou.cartrack.entities.Utilisateur;
 import com.falilou.cartrack.web.dtos.request.UtilisateurRequestDto;
 import com.falilou.cartrack.web.dtos.request.response.UtilisateurResponseDto;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.ReportingPolicy;
 
@@ -11,6 +12,10 @@ import org.mapstruct.ReportingPolicy;
 public interface UtilisateurMapper {
 
 
+    @Mapping(source = "nom", target = "nom")
+    @Mapping(source = "prenom", target = "prenom")
+    @Mapping(source = "username", target = "username")
+    @Mapping(source = "role", target = "role")
     Utilisateur toEntity(UtilisateurRequestDto utilisateurRequestDto);
 
     UtilisateurResponseDto toResponse(Utilisateur utilisateur);
