@@ -6,7 +6,8 @@ import com.falilou.cartrack.mappers.UtilisateurMapper;
 import com.falilou.cartrack.repositories.UtilisateurRepository;
 import com.falilou.cartrack.services.serviceInterface.IUtilisateur;
 import com.falilou.cartrack.web.dtos.request.UtilisateurRequestDto;
-import com.falilou.cartrack.web.dtos.request.response.UtilisateurResponseDto;
+import com.falilou.cartrack.web.dtos.response.Response;
+import com.falilou.cartrack.web.dtos.response.UtilisateurResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -54,6 +55,75 @@ public class UtilisateurService implements IUtilisateur {
     }
 
     /**
+     * @return la liste de tous les utilisateurs
+     * @throws RuntimeException s'il y a une erreur lors de la récuperation des utilisateurs
+     */
+    @Override
+    public List<UtilisateurResponseDto> listeUtilisateurs() {
+        try {
+            List<Utilisateur> utilisateurs = utilisateurRepository.findAll();
+            return utilisateurs.stream().map(utilisateurMapper::toResponse).toList();
+        }catch (Exception e) {
+            throw new RuntimeException("Erreur lors de la récuperation des utilisateurs de l'utilisateur: " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * @param id
+     * @return
+     */
+    @Override
+    public UtilisateurResponseDto findById(Long id) {
+        try {
+            Optional<Utilisateur> utilisateurOptional = utilisateurRepository.findById(id);
+            if (utilisateurOptional.isEmpty()) {
+                return null;
+            }
+            Utilisateur utilisateur = utilisateurOptional.get();
+            return utilisateurMapper.toResponse(utilisateur);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * @param utilisateur
+     * @param id
+     * @return
+     */
+    @Override
+    public UtilisateurResponseDto update(Long id, UtilisateurRequestDto utilisateur) {
+        try {
+            Optional<Utilisateur> utilisateurOptional = utilisateurRepository.findById(id);
+            if (utilisateurOptional.isEmpty()) {
+                return null;
+            }
+            Utilisateur user = utilisateurOptional.get();
+            user.setNom(utilisateur.nom());
+            user.setPrenom(utilisateur.prenom());
+            utilisateurRepository.saveAndFlush(user);
+            return utilisateurMapper.toResponse(user);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * @param id
+     * @return
+     */
+    @Override
+    public Response<Object> delete(Long id) {
+        try{
+            Optional<Utilisateur> utilisateurOptional = utilisateurRepository.findById(id);
+            utilisateurOptional.ifPresent(utilisateurRepository::delete);
+            return Response.ok();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
      * Valide les données d'un utilisateur avant sa création.
      *
      * @param utilisateurDTO les informations de l'utilisateur à valider
@@ -61,7 +131,7 @@ public class UtilisateurService implements IUtilisateur {
      */
     private void validateUserData(UtilisateurRequestDto utilisateurDTO) {
         if (utilisateurDTO.username() == null || utilisateurDTO.username().trim().isEmpty()) {
-            throw new IllegalArgumentException("Le nom d'utilisateur ne peut pas être vide");
+            throw new IllegalArgumentException("Le login ne peut pas être vide");
         }
         if (utilisateurDTO.nom() == null || utilisateurDTO.nom().trim().isEmpty()) {
             throw new IllegalArgumentException("Le nom ne peut pas être vide");

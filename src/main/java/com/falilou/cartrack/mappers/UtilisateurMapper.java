@@ -2,7 +2,7 @@ package com.falilou.cartrack.mappers;
 
 import com.falilou.cartrack.entities.Utilisateur;
 import com.falilou.cartrack.web.dtos.request.UtilisateurRequestDto;
-import com.falilou.cartrack.web.dtos.request.response.UtilisateurResponseDto;
+import com.falilou.cartrack.web.dtos.response.UtilisateurResponseDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;

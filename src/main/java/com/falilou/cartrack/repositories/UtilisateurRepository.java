@@ -14,4 +14,5 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> 
     Optional<Utilisateur> findFirstByUsername(String username);
     List<Utilisateur> findByRole(Role role);
     boolean existsByUsername(String username);
+
 }
