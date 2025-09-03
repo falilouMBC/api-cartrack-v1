@@ -56,9 +56,10 @@ public abstract class BusinessException extends RuntimeException {
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public static class MethodArgumentNotValidException extends BusinessException {
-        public MethodArgumentNotValidException(String message) {
-            super("MethodArgumentNotValid", message);
+    public static class ValidationError extends BusinessException {
+        public ValidationError(String message) {
+            super("Validation Error", message);
         }
     }
+
 }

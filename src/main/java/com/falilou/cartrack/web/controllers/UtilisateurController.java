@@ -25,7 +25,8 @@ public class UtilisateurController {
     }
 
     @PatchMapping("/utilisateur/{id}")
-    public UtilisateurResponseDto update(@Validated @RequestBody UtilisateurRequestDto utilisateur,@PathVariable Long id) {
+    public UtilisateurResponseDto update(
+            @Validated @RequestBody UtilisateurRequestDto utilisateur,@PathVariable Long id) {
         return iUtilisateur.update(id, utilisateur);
     }
 
