@@ -1,4 +1,4 @@
-package com.falilou.cartrack.web.response;
+package com.falilou.cartrack.web.dtos.response;
 
 import com.falilou.cartrack.entities.Chauffeur;
 import com.falilou.cartrack.enums.StatutLivraison;

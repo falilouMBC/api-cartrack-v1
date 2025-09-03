@@ -1,0 +1,22 @@
+package com.falilou.cartrack.mappers;
+
+import com.falilou.cartrack.entities.Utilisateur;
+import com.falilou.cartrack.web.dtos.request.UtilisateurRequestDto;
+import com.falilou.cartrack.web.dtos.response.UtilisateurResponseDto;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingConstants;
+import org.mapstruct.ReportingPolicy;
+
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
+public interface UtilisateurMapper {
+
+
+    @Mapping(source = "nom", target = "nom")
+    @Mapping(source = "prenom", target = "prenom")
+    @Mapping(source = "username", target = "username")
+    @Mapping(source = "role", target = "role")
+    Utilisateur toEntity(UtilisateurRequestDto utilisateurRequestDto);
+
+    UtilisateurResponseDto toResponse(Utilisateur utilisateur);
+}
